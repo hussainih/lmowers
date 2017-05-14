@@ -12,6 +12,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var authenticate = require('./routes/authenticate');
 var employeerregistration = require('./routes/employeerregister');
+var employeeregistration = require('./routes/employeeregister');
+var employerworkdetails = require('./routes/employerworkdetails');
 var app = express();
 var secureRoutes = express.Router();
 
@@ -36,6 +38,8 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/authenticate',authenticate);
 app.use('/employerregistration', employeerregistration);
+app.use('/employeeregisteration', employeeregistration );
+app.use('/employerworkdetails', employerworkdetails);
 
 secureRoutes.use(function(req, res, next){
   var token = req.body.token || req.headers['token'];
