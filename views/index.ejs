@@ -28,7 +28,7 @@
         <strong>Success!</strong> You are logged in as an Employer.
     </div>
   <div class="buttons">
-    <a data-toggle="modal" data-target="#login">LOGIN</a>
+    <a data-toggle="modal"  data-target="#login">LOGIN</a>
     <a type="submit" class="btn btn-default" href="register">REGISTER</a>
   </div>
 </header>
@@ -137,7 +137,7 @@
       </div>
       <div class="modal-footer" style="text-align:center;">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <a type="submit" class="btn btn-primary" href="sample">Login</a>
+        <a type="button" onclick="login()" class="btn btn-primary">Login</a>
       </div>
     </div>
   </div>
@@ -182,19 +182,32 @@
         });
 
     });
-    $.ajax
-    ({
+    function login()
+    {
+
+      $.ajax
+      ({
+
         type: "POST",
-        url: "sample",
+        url: "/authenticate",
         dataType: 'json',
         async: false,
-        email:$('#exampleInputEmail1').val(),
-        password: $('#Password').val(),
-        data: '{ "comment" }',
-        success: function (){
-            alert('Thanks for your comment!');
+        data: {
+
+              "email": $('#exampleInputEmail1').val(),
+              "password": $('#Password').val()
+        },
+        success: function (data , status) {
+          if(data.success){
+            localStorage.setItem("token", data.token)
+
+          }else{
+            alert("authentication failed, please try again");
+          }
+
         }
-    });
+      });
+    }
 </script>
 
 </body>
