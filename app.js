@@ -6,10 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 process.env.SECRET_KEY = "secretkey";
 
+
 var jwt = require('jsonwebtoken');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var authenticate = require('./routes/authenticate');
+var employeerregistration = require('./routes/employeerregister');
 var app = express();
 var secureRoutes = express.Router();
 
@@ -33,6 +35,7 @@ app.use('/secure', secureRoutes);
 app.use('/', index);
 app.use('/users', users);
 app.use('/authenticate',authenticate);
+app.use('/employerregistration', employeerregistration);
 
 secureRoutes.use(function(req, res, next){
   var token = req.body.token || req.headers['token'];
