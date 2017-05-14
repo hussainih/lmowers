@@ -13,6 +13,7 @@ var users = require('./routes/users');
 var authenticate = require('./routes/authenticate');
 var register = require('./routes/register');
 var employerworkdetails = require('./routes/employerworkdetails');
+var sample = require('./routes/sample');
 var app = express();
 var secureRoutes = express.Router();
 
@@ -38,7 +39,7 @@ app.use('/users', users);
 app.use('/authenticate',authenticate);
 app.use('/register', register );
 app.use('/employerworkdetails', employerworkdetails);
-
+app.use('/sample', sample);
 secureRoutes.use(function(req, res, next){
   var token = req.body.token || req.headers['token'];
   if(token){
