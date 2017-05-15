@@ -16,9 +16,9 @@ var employerworkdetails = require('./routes/employerworkdetails');
 var sample = require('./routes/sample');
 var app = express();
 var secureRoutes = express.Router();
-
-var ads = require('./routes/getAds');
-
+var checkToken = require('./routes/checkToken');
+var ads = require('./routes/ads');
+var readAds = require('./routes/readAds');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,9 +40,11 @@ app.use('/authenticate',authenticate);
 app.use('/register', register );
 app.use('/employerworkdetails', employerworkdetails);
 app.use('/sample', sample);
+app.use('/checkToken', checkToken);
 secureRoutes.use(function(req, res, next){
   var token = req.body.token || req.headers['token'];
   if(token){
+    console.log("the TOken is" +token);
     jwt.verify(token,process.env.SECRET_KEY, function(err, decode){
       if(err){
         res.status(500).send("Invalid Token");
@@ -58,8 +60,10 @@ secureRoutes.use(function(req, res, next){
 
 });
 
-
-secureRoutes.post('/getads', ads.getAds);
+secureRoutes.post('/createAds', ads.createAds)
+app.use('/readAds', readAds);
+secureRoutes.delete('/deleteAds', ads.deleteAds);
+secureRoutes.post('/updateAds',ads.updateAds);
 
 
 // catch 404 and forward to error handler
