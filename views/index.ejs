@@ -229,14 +229,18 @@
           "token": localStorage.getItem("token")
         },
         success: function (data , status) {
-            if(data.validated == "no"){
-              alert("Authentication failed, please login");
-            }
-            if(data.validated == "yes"){
+
+
+
+            if(data.validated == "yes") {
               window.location = "/employerworkdetails";
+            } else{
+              alert("please login first");
             }
 
-
+        },
+        error: function(data, status){
+          alert("please Login first");
         }
       });
     }
