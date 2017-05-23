@@ -63,7 +63,7 @@ module.exports.deleteAds = function(req, res, next){
 
 module.exports.updateAds = function(req, res, next){
     console.log("This the Item"+ req.body.Area);
-    var sql = "update lmower.ads set lmower.ads.Area = " +req.body.Area +" where lmower.ads.id=1;" ;
+    var sql = "update lmower.ads set lmower.ads.Area = " +req.body.Area +" where lmower.ads.id=" + req.body.id + ";" ;
 
 
         var con = mysql.createConnection({
