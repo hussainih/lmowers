@@ -21,8 +21,8 @@ module.exports.createAds = function(req, res, next){
 
     if (req.body.Area && req.body.payAmount) {
         var con = mysql.createConnection({
-            host: "lmower.ck1dzexlod8f.us-west-2.rds.amazonaws.com",
-            user: "lmower",
+            host: "104.155.84.249",
+            user: "root",
             password: "lmowerpassword"
         });
 
@@ -43,8 +43,8 @@ module.exports.deleteAds = function(req, res, next){
     var sql = "delete from lmower.ads where lmower.ads.id = " + req.body.id + ";";
     if (req.body.Area && req.body.payAmount) {
         var con = mysql.createConnection({
-            host: "lmower.ck1dzexlod8f.us-west-2.rds.amazonaws.com",
-            user: "lmower",
+            host: "104.155.84.249",
+            user: "root",
             password: "lmowerpassword"
         });
 
@@ -67,8 +67,8 @@ module.exports.updateAds = function(req, res, next){
 
 
         var con = mysql.createConnection({
-            host: "lmower.ck1dzexlod8f.us-west-2.rds.amazonaws.com",
-            user: "lmower",
+            host: "104.155.84.249",
+            user: "root",
             password: "lmowerpassword"
         });
 
