@@ -22,7 +22,7 @@
 <body>
 <header>
   <div class="header-left">
-    <img src="/images/logo.png"/><h3>Lawn Mower Hub</h3>
+    <img src="/images/logo.png"/><h3>Lawn Mower Hub 1</h3>
   </div>
     <div class="alert alert-success hide">
         <strong>Success!</strong> You are logged in as an Employer.
@@ -86,6 +86,7 @@
         </table>
       </div>
       <button type="button" onclick="postJobAuth()" class="btn btn-primary post-jobs">Post Jobs</button>
+      <button type="button" onclick="consume()" class="btn btn-primary rest-jobs">Consume Rest on Server 2</button>
     </section>
     <section class="emp-view map-view col-lg-offset-1 col-lg-5">
       <div id="map"></div>
@@ -212,6 +213,9 @@
 
         }
       });
+    }
+    function consume(){
+      window.location = "/readlmower2";
     }
 
     function postJobAuth()
