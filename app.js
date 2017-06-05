@@ -50,8 +50,10 @@ secureRoutes.use(function(req, res, next){
     console.log("the TOken is" +token);
     jwt.verify(token,process.env.SECRET_KEY, function(err, decode){
       if(err){
+        console.log("problem with token");
         res.status(500).send("Invalid Token");
       } else{
+        console.log("token is valid");
         next();
       }
     })
@@ -65,6 +67,7 @@ secureRoutes.use(function(req, res, next){
 
 secureRoutes.post('/createAds', ads.createAds)
 secureRoutes.get('/readAds', readAds);
+
 secureRoutes.delete('/deleteAds', ads.deleteAds);
 secureRoutes.post('/updateAds',ads.updateAds);
 
