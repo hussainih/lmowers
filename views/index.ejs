@@ -214,8 +214,33 @@
         }
       });
     }
-    function consume(){
-      window.location = "/readlmower2";
+    function consume()
+    {
+
+      $.ajax
+      ({
+
+        type: "POST",
+        url: "/checkToken",
+        dataType: 'json',
+        async: false,
+        data: {
+
+          "token": localStorage.getItem("token")
+        },
+        success: function (data , status) {
+
+
+
+          if(data.validated == "yes") {
+            window.location = "/readlmower1";
+          } else{
+            alert("please login first");
+          }
+
+        }
+
+      });
     }
 
     function postJobAuth()
