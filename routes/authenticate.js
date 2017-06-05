@@ -61,7 +61,7 @@ router.post('/', function(req, res, next) {
         }
         //generate token
         var token = jwt.sign(user, process.env.SECRET_KEY, {
-            expiresIn: 4000
+            expiresIn: 120
         });
 
 
