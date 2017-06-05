@@ -64,7 +64,7 @@ secureRoutes.use(function(req, res, next){
 });
 
 secureRoutes.post('/createAds', ads.createAds)
-app.use('/readAds', readAds);
+secureRoutes.get('/readAds', readAds);
 secureRoutes.delete('/deleteAds', ads.deleteAds);
 secureRoutes.post('/updateAds',ads.updateAds);
 
