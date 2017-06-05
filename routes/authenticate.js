@@ -22,7 +22,7 @@ router.post('/', function(req, res, next) {
         var sql = "select * from lmower.users where email = '" + email + "' AND password = '" + pass + "';";
 
         var con = mysql.createConnection({
-            host: "35.189.237.219",
+            host: "35.187.161.12",
             user: "root",
             password: "lmowerpassword"
         });

@@ -19,6 +19,7 @@ var secureRoutes = express.Router();
 var checkToken = require('./routes/checkToken');
 var ads = require('./routes/ads');
 var readAds = require('./routes/readAds');
+var readLmower2 = require('./routes/readlmower2');
 var cors = require('cors')
 
 var app = express()
@@ -44,6 +45,7 @@ app.use('/register', register );
 app.use('/employerworkdetails', employerworkdetails);
 app.use('/sample', sample);
 app.use('/checkToken', checkToken);
+app.use('/readlmower2', readLmower2);
 secureRoutes.use(function(req, res, next){
   var token = req.body.token || req.headers['token'];
   if(token){
