@@ -22,7 +22,7 @@ router.post('/', function(req, res, next) {
         var sql = "select * from lmower.users where email = '" + email + "' AND password = '" + pass + "';";
 
         var con = mysql.createConnection({
-            host: "104.155.84.249",
+            host: "35.189.237.219",
             user: "root",
             password: "lmowerpassword"
         });
@@ -74,10 +74,7 @@ router.post('/', function(req, res, next) {
         })
     }
 
-    res.json({ //send authentication failure message
-        success: false,
-        token: "authentication failed"
-    })
+
 });
 
 module.exports = router;

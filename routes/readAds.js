@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     var sql = "select * from lmower.ads";
 
     var con = mysql.createConnection({
-        host: "104.155.84.249",
+        host: "35.189.237.219",
         user: "root",
         password: "lmowerpassword"
     });
