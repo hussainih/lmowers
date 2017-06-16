@@ -7,8 +7,8 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
     for(  a=0; a<=100000; a++){
-        for(b =1; b<=100;b++){
-            c=99+a;
+        for(b =1; b<=10000;b++){
+            c=99*a;
 
         }
 
