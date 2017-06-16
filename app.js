@@ -20,6 +20,7 @@ var checkToken = require('./routes/checkToken');
 var ads = require('./routes/ads');
 var readAds = require('./routes/readAds');
 var readLmower2 = require('./routes/readlmower2');
+var load = require('./routes/load');
 var cors = require('cors')
 
 var app = express()
@@ -35,7 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/load', load);
 app.use('/secure', secureRoutes);
 
 app.use('/', index);
