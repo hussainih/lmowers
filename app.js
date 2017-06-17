@@ -21,6 +21,8 @@ var ads = require('./routes/ads');
 var readAds = require('./routes/readAds');
 var readLmower2 = require('./routes/readlmower2');
 var load = require('./routes/load');
+var vision = require('./routes/vision');
+var upload = require('./routes/upload');
 var cors = require('cors')
 
 var app = express()
@@ -47,6 +49,10 @@ app.use('/employerworkdetails', employerworkdetails);
 app.use('/sample', sample);
 app.use('/checkToken', checkToken);
 app.use('/readlmower2', readLmower2);
+app.use('/vision', vision);
+app.use('/upload', upload);
+
+
 secureRoutes.use(function(req, res, next){
   var token = req.body.token || req.headers['token'];
   if(token){
