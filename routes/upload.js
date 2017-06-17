@@ -40,10 +40,11 @@ router.post('/', upload.single('image'), function(req, res, next){
             res.write(form);
             // Base64 the image so we can display it on the page
             res.write('<img width=200 src="' + base64Image(req.file.path) + '"><br>');
-
+            res.write('<div style="background-color:gray; color:blue; widht:300px">')
             // Write out the JSON output of the Vision API
             res.write(JSON.stringify(detections, null, 4));
 
+            res.write('</div>');
             // Delete file (optional)
             fs.unlinkSync(req.file.path);
 
