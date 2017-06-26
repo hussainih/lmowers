@@ -1,50 +1,63 @@
 /**
  * Created by moham on 17-Jun-17.
  */
+'use strict';
+
 var express = require('express');
-var router = express.Router();
 var fs = require('fs');
 var util = require('util');
 var mime = require('mime');
 var multer = require('multer');
 var upload = multer({dest: 'uploads/'});
+
+// Set up auth
+var gcloud = require('gcloud')({
+    keyFilename: 'Group4-d1991f17d2b7.json',
+    projectId: 'group4-168406'
+});
+
+var vision = gcloud.vision();
+
+var app = express();
+
+// Simple upload form
 var form = '<!DOCTYPE HTML><html><body>' +
     "<form method='post' action='/upload' enctype='multipart/form-data'>" +
     "<input type='file' name='image'/>" +
     "<input type='submit' /></form>" +
     '</body></html>';
 
-var gcloud = require('gcloud')({
-    keyFilename: 'Group4-d1991f17d2b7.json',
-    projectId: 'group4-168406'
+app.get('/', function(req, res) {
+    res.writeHead(200, {
+        'Content-Type': 'text/html'
+    });
+    res.end(form);
 });
 
-
-var vision = gcloud.vision();
-router.post('/', upload.single('image'), function(req, res, next){
+// Get the uploaded image
+// Image is uploaded to req.file.path
+app.post('/upload', upload.single('image'), function(req, res, next) {
 
     // Choose what the Vision API should detect
     // Choices are: faces, landmarks, labels, logos, properties, safeSearch, texts
     var types = ['labels'];
-    console.log("what the fuck;");
+
     // Send the image to the Cloud Vision API
     vision.detect(req.file.path, types, function(err, detections, apiResponse) {
         if (err) {
             res.end('Cloud Vision Error');
-            console.log(err);
         } else {
             res.writeHead(200, {
                 'Content-Type': 'text/html'
             });
-            res.write('<!DOCTYPE HTML><html><body background="/images/lawn.jpg">');
-            res.write(form);
+            res.write('<!DOCTYPE HTML><html><body>');
+
             // Base64 the image so we can display it on the page
-            res.write('<img border="4" width=400 style="margin-top: 35px" src="' + base64Image(req.file.path) + '"><br>');
-            res.write('<div style="color: black; font-size: 20px; margin-top: 20px; margin-left: 30px; width: 100px; background: khaki; padding: 15px;">')
+            res.write('<img width=200 src="' + base64Image(req.file.path) + '"><br>');
+
             // Write out the JSON output of the Vision API
             res.write(JSON.stringify(detections, null, 4));
 
-            res.write('</div>');
             // Delete file (optional)
             fs.unlinkSync(req.file.path);
 
@@ -53,10 +66,12 @@ router.post('/', upload.single('image'), function(req, res, next){
     });
 });
 
+app.listen(80);
+console.log('Server Started');
+
+// Turn image into Base64 so we can display it easily
 
 function base64Image(src) {
     var data = fs.readFileSync(src).toString('base64');
     return util.format('data:%s;base64,%s', mime.lookup(src), data);
 }
-
-module.exports = router;
